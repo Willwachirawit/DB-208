@@ -23,25 +23,36 @@ html{
     height: 180px;
     padding-left: 2px;
     overflow: hidden;
+    display: flex;
 }
 
-.key{
+.octave{
+    display: flex;
+    width: 315px;
+}
+
+.key.white{
     background-color: #fff;
     width: 41px;
     height: 175px;
-    float: left;
+    /* float: left; */
     margin: 2px;
     border-radius: 0 0 3px 3px;
     position: relative;
 }
 
-.key.black-key::after {
+.keyblack{
+    position: relative; 
+}
+.key.black::after {
     background-color: #1d1e22;
     width: 32px;
     height: 100px;
     content: "";
     position: absolute;
-    left: -18px;
+    left: -16px;
+    border-radius: 0 0 3px 3px;
+    z-index: 999;
 }
 
 .logo{
