@@ -14,19 +14,19 @@
         <div class="keys">
             <!-- Small size -->
         <div class="octave" data-octave="3">
-        <div class="key white" data-note="C"></div>
-        <div class="key black"data-note="C#"></div>
-        <div class="key white"data-note="D"></div>
-        <div class="key black"data-note="D#"></div>
-        <div class="key white"data-note="E"></div>
-        <div class="key white"data-note="F"></div>
-        <div class="key black"data-note="F#"></div>
-        <div class="key white"data-note="G"></div>
-        <div class="key black"data-note="G#"></div>
-        <div class="key white"data-note="A"></div>
-        <div class="key black"data-note="A#"></div>
-        <div class="key white"data-note="B"></div>
-    </div>
+        <div class="key white" data-note="C" data-kb="a">C</div>
+        <div class="key black"data-note="C#" data-kb="w"></div>
+        <div class="key white"data-note="D" data-kb="s">D</div>
+        <div class="key black"data-note="D#" data-kb="e"></div>
+        <div class="key white"data-note="E" data-kb="d">E</div>
+        <div class="key white"data-note="F" data-kb="f">F</div>
+        <div class="key black"data-note="F#" data-kb="t"></div>
+        <div class="key white"data-note="G" data-kb="g">G</div>
+        <div class="key black"data-note="G#" data-kb="y"></div>
+        <div class="key white"data-note="A" data-kb="h">A</div>
+        <div class="key black"data-note="A#" data-kb="u"></div>
+        <div class="key white"data-note="B" data-kb="j"></div>
+        </div>
             <!-- Medium size -->
             <div class="octave" data-octave="4">
                 <div class="key white" data-note="C"></div>
@@ -41,7 +41,7 @@
                 <div class="key white"data-note="A"></div>
                 <div class="key black"data-note="A#"></div>
                 <div class="key white"data-note="B"></div>
-            <div>
+            </div>
             <!-- Large size -->
             <div class="octave" data-octave="5">
                 <div class="key white" data-note="C"></div>
@@ -56,11 +56,34 @@
                 <div class="key white"data-note="A"></div>
                 <div class="key black"data-note="A#"></div>
                 <div class="key white"data-note="B"></div>
-            <div>
+            </div>
     </div>
 </div>
 <script>
    let piano = Synth.createInstrument('piano');
+   let keys = document.querySelectorAll('.key');
+
+   for (let key of keys) {
+    key.addEventListener('mousedown', function(){
+        let note = this.dataset.note;
+        let octave = this.parentElement.dataset.octave;
+
+        piano.play(note, octave, 2);
+    });
+   }
+
+   document.addEventListener('keydown', function(event){
+    let kb = event.key;
+    let key = document.querySelector(
+      `.key[data-kb="${kb}"]`);
+    //'.key[data-kb="'+kb+'"]')
+    if (key) {
+        let note = key.dataset.note;
+        let octave = key.parentElement.dataset.octave;
+
+        piano.play(note, octave,2);
+    }
+   });
 </script>
 </body>
 </html>

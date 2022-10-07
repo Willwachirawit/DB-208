@@ -31,6 +31,14 @@ html{
     width: 315px;
 }
 
+.key:active {
+    transform: translateY(2px);
+}
+
+.key.black:active {
+    z-index: 1000px;
+}
+
 .key.white{
     background-color: #fff;
     width: 41px;
@@ -39,11 +47,16 @@ html{
     margin: 2px;
     border-radius: 0 0 3px 3px;
     position: relative;
+    padding-top: 140px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.keyblack{
+.key.black{
     position: relative; 
 }
+
 .key.black::after {
     background-color: #1d1e22;
     width: 32px;
@@ -54,7 +67,6 @@ html{
     border-radius: 0 0 3px 3px;
     z-index: 999;
 }
-
 .logo{
     position: absolute;
     top: 23px;
