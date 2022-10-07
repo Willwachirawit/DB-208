@@ -78,10 +78,16 @@
       `.key[data-kb="${kb}"]`);
     //'.key[data-kb="'+kb+'"]')
     if (key) {
+        key.classList.add('pressed');
         let note = key.dataset.note;
         let octave = key.parentElement.dataset.octave;
 
-        piano.play(note, octave,2);
+        piano.play(note, octave, 2);
+        setTimeout(function(){
+            let key = document.querySelector(
+                `.key[data-kb="${event.key}"]`);
+                key.classList.remove('pressed');      
+        }, 200);
     }
    });
 </script>

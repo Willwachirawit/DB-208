@@ -31,8 +31,9 @@ html{
     width: 315px;
 }
 
-.key:active {
+.key:active, .pressed{
     transform: translateY(2px);
+    z-index: 0;
 }
 
 .key.black:active {
