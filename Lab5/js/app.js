@@ -10,6 +10,9 @@ const CHOICE = document.querySelectorAll('.choice');
 const MESSAGE = document.querySelector('#message');
 
 function ready(){
+    USERCHOICE.setAttribute('src', `image/rock.png`);
+    COMPCHOICE.setAttribute('src', `image/rock.png`);
+
     USERCHOICE.classList.add('ready');
     COMPCHOICE.classList.add('ready');
 }
@@ -28,6 +31,9 @@ function computerSelect(){
 }
 
 function play(userChoice){
+    USERCHOICE.classList.remove('ready');
+    COMPCHOICE.classList.remove('ready');
+
     let compChoice = computerSelect();
     USERCHOICE.setAttribute('src', `image/${userChoice}.png`);
     COMPCHOICE.setAttribute('src', `image/${compChoice}.png`);
@@ -69,6 +75,9 @@ function play(userChoice){
     else{
         draw(userChoice);
     }
+    setTimeout(()=>{
+        ready();
+    },1000);
 }
 
 function win(user, comp){
