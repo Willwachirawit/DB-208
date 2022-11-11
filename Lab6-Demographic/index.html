@@ -47,19 +47,24 @@
         </tr>
       </table>
     </div>
-    <script src="js/load_data.js"></script>
+    <!-- <script src="js/load_data.js"></script> -->
     <script>
       const year_filter = document.getElementById('year');
       const month_filter = document.getElementById('month');
       const dname_filter = document.getElementById('dname');
-      let years = new Set(data.map((d) => d.year_save));
+      let data;
+       fetch('./data/data.json')
+       .then((response) => response.json())
+       .then(_data => {
+         data = _data;
+       let years = new Set(data.map((d) => d.year_save));
       years = [...years].sort();
       year_filter.innerHTML = "";
       for (let y of years) {
         year_filter.innerHTML += `<option>${y}</option>`;
       }
       resetMonth();
-
+            });
       function resetMonth(){
         const selectedYear = year_filter.value;
         const focus = data.filter(
@@ -120,7 +125,53 @@
                     } 
                 }
                 );
-      }
+
+                // Mean
+                let sum_age = 0;
+                let population = 0;
+                for(let i = 0; i < 100; i++) {
+                  sum_age += chart_labels[i] * chart_data[i];
+                  population += chart_data[i];
+                }
+                const mean_age = sum_age / population;
+                document.getElementById('mean').innerHTML = mean_age;
+
+                //Median
+                const median_pos = Math.floor (population / 2);
+                let comm_pos = 0;
+                let index = -1;
+                while(comm_pos < median_pos) {
+                  comm_pos += chart_data[++index];
+                }
+                const median_age = population % 2 == 0 && comm_pos == median_pos ?
+                index+1.5 : index+1;
+                document.getElementById('median').innerHTML = median_age;
+
+                //Mode
+                //  let mode_age = 0;
+                //  let big_age = 0;
+                //  for(let i = 0; i < 100; i++){
+                //    if(chart_data[i] > big_age){
+                //      big_age = chart_data[i];
+                //      mode_age = i+1;
+                //    }
+                //   }
+                const mode_age = (3*median_age) - (2*mean_age);
+                document.getElementById('mode').innerHTML = mode_age;
+
+                //Variance
+                const variance = chart_data.reduce(
+                  (sum_sq, value, index) => {
+                    return sum_sq += ((index+1) - mean_age) ** 2 * value;
+                  },
+                  0
+                ) / population;
+                document.getElementById('variance').innerHTML = variance;
+                
+                //SD
+                const sd = variance ** 0.5;
+                document.getElementById('sd').innerHTML = sd;
+             }
     </script>
   </body>
 </html>
