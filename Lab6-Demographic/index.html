@@ -147,16 +147,16 @@
                 index+1.5 : index+1;
                 document.getElementById('median').innerHTML = median_age;
 
-                //Mode
-                //  let mode_age = 0;
-                //  let big_age = 0;
-                //  for(let i = 0; i < 100; i++){
-                //    if(chart_data[i] > big_age){
-                //      big_age = chart_data[i];
-                //      mode_age = i+1;
-                //    }
-                //   }
-                const mode_age = (3*median_age) - (2*mean_age);
+                // Mode
+                 let mode_age = 0;
+                 let big_age = 0;
+                 for(let i = 0; i < 100; i++){
+                   if(chart_data[i] > big_age){
+                     big_age = chart_data[i];
+                     mode_age = i+1;
+                   }
+                  }
+                // const mode_age = (3*median_age) - (2*mean_age);
                 document.getElementById('mode').innerHTML = mode_age;
 
                 //Variance
